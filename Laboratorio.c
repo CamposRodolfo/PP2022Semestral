@@ -99,7 +99,7 @@ int main()
 	{
 		for (adriana=0; adriana<COMPUTADORAS; adriana++)
 		{
-			laboratorio[rodolfo][adriana] = adriana+1;
+			laboratorio[rodolfo][adriana] = 0;
 		}
 	}
 	
@@ -204,11 +204,11 @@ int ImprimirLaboratorio(int mesas, int computadoras, int laboratorio[mesas][comp
 		printf("|\n||");
 		for (c=0; c<computadoras; c++)
 		{
-			if(laboratorio[m][c]>0)
+			if(laboratorio[m][c]==0)
 			{	
 				printf("  \033[32m Disponible \033[0m      |");
 			}
-			else if(laboratorio[m][c]==0)
+			else if(laboratorio[m][c]>0)
 			{
 				printf(" \033[31m No Disponible \033[0m    |");
 			}
@@ -243,7 +243,7 @@ int ValidarNumero(int n)  //Funcion para validar numero de entrada
 	} while (i<1 || i>n);
 }
 
-int Verificarcedula()  //Funcion para verficar acceso con cedula
+int VerificarCedula()  //Funcion para verficar acceso con cedula
 {
 	//Declaracion de Variables
 	int i, buscar;
@@ -275,7 +275,7 @@ int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 	system("cls");
 	do
 	{
-		if(Verificarcedula()==1)
+		if(VerificarCedula()==1)
 		{
 			ImprimirLaboratorio(mesas, computadoras, laboratorio);
 			printf("Para realizar una reserva, seleccione una mesa y una computadora.\n");
@@ -283,9 +283,9 @@ int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 			mesa=ValidarNumero(mesas);
 			printf("Ingrese el numero de computadora: ");
 			computadora=ValidarNumero(computadoras);
-			if (laboratorio[mesa-1][computadora-1] != 0)
+			if (laboratorio[mesa-1][computadora-1] == 0)
 			{
-				laboratorio[mesa-1][computadora-1] = 0;
+				laboratorio[mesa-1][computadora-1] = mesa;
 				printf("\n\nLa reserva fue exitosa!!\n");
 				printf("Su lugar reservado es: mesa %d y computadora %d! \n\n", mesa, computadora);
 			}
@@ -325,7 +325,7 @@ int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 	system("cls");
 	do
 	{
-		if(Verificarcedula()==1)
+		if(VerificarCedula()==1)
 		{
 			ImprimirLaboratorio(mesas, computadoras, laboratorio);
 			printf("Para culminar una reserva, seleccione una mesa y una computadora.\n");
@@ -333,9 +333,9 @@ int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 			mesa=ValidarNumero(mesas);
 			printf("Ingrese el numero de computadora: ");
 			computadora=ValidarNumero(computadoras);
-			if (laboratorio[mesa-1][computadora-1] == 0)
+			if (laboratorio[mesa-1][computadora-1] == mesa)
 			{
-				laboratorio[mesa-1][computadora-1] = mesa;
+				laboratorio[mesa-1][computadora-1] = 0;
 				printf("\n\nLa reserva fue cancelada con exito!\n");
 				printf("e culmino su reservacion de: mesa %d y computadora %d!\n\n", mesa, computadora);
 			}
