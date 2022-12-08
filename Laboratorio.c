@@ -92,14 +92,14 @@ char todosLosApellidos[PERSONAS][15]=
 int main()
 {
 	//Declaracion de Variables
-	int adriana, m, c, mesa, computadora, laboratorio[MESAS][COMPUTADORAS];
+	int rodolfo, adriana, seleccion, mesa, computadora, laboratorio[MESAS][COMPUTADORAS];
 	
 	//Valorando Arreglo
-	for (m=0; m<MESAS; m++)
+	for (rodolfo=0; rodolfo<MESAS; rodolfo++)
 	{
-		for (c=0; c<COMPUTADORAS; c++)
+		for (adriana=0; adriana<COMPUTADORAS; adriana++)
 		{
-			laboratorio[m][c] = c+1;
+			laboratorio[rodolfo][adriana] = adriana+1;
 		}
 	}
 	
@@ -114,8 +114,8 @@ int main()
 		printf("5. Ver el listado de los estudiantes autorizado para usar el laboratorio.\n");
 		printf("6. Salir del sistema.\n\n");
 		printf("Seleccion: ");
-		scanf("%d", &adriana);
-		switch(adriana)
+		scanf("%d", &seleccion);
+		switch(seleccion)
 		{
 			case 1:
 				system("cls");
@@ -128,7 +128,7 @@ int main()
 				system("PAUSE");
 				break;
 			case 3:
-				//Cancelar();
+				Cancelar(MESAS, COMPUTADORAS, laboratorio);
 				system("PAUSE");
 				break;
 			case 4:
@@ -146,7 +146,7 @@ int main()
 				printf("\n\033[33m>> inserte un numero valido <<\033[0m\n");
 				system("PAUSE");
 		}
-	}while (adriana!=6);
+	}while (seleccion!=6);
 	return 0;
 }
 
@@ -269,7 +269,7 @@ int Verificarcedula()  //Funcion para verficar acceso con cedula
 int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras])  //Funcion para reservar computadora
 {
 	//Declaracion de variables
-	int mesa, computadora, rodolfo;
+	int mesa, computadora, seleccion;
 	
 	//Bloque de Instrucciones
 	system("cls");
@@ -302,24 +302,73 @@ int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 				printf("Usted no esta dentro de la lista de personas para realizar una reserva\n");
 				printf("Desea volver a intentarlo?\n");
 				printf("Digite 1 para si, 0 para salir: ");
-				scanf("%d", &rodolfo);
-				if (rodolfo<0 || rodolfo>1)
+				scanf("%d", &seleccion);
+				if (seleccion<0 || seleccion>1)
 				{
 					printf("No hay tal numero! Elige un numero entre el 0 y 1!\n");
 					system("PAUSE");
 					
 				}
-			} while (rodolfo<0 || rodolfo>1);
+			} while (seleccion<0 || seleccion>1);
 			system("cls");
 		}
-	}while(rodolfo==1);
+	}while(seleccion==1);
 	printf("Presione cualquier tecla para regresar\n");	
 }
 	
 int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras])  //Funcion para cancelar reserva de computadora
 {
+	//Declaracion de variables
+	int mesa, computadora, seleccion;
 	
+	//Bloque de Instrucciones
+	system("cls");
+	do
+	{
+		if(Verificarcedula()==1)
+		{
+			ImprimirLaboratorio(mesas, computadoras, laboratorio);
+			printf("Para culminar una reserva, seleccione una mesa y una computadora.\n");
+			printf("Ingrese el numero de mesa: ");
+			mesa=ValidarNumero(mesas);
+			printf("Ingrese el numero de computadora: ");
+			computadora=ValidarNumero(computadoras);
+			if (laboratorio[mesa-1][computadora-1] == 0)
+			{
+				laboratorio[mesa-1][computadora-1] = mesa;
+				printf("\n\nLa reserva fue cancelada con exito!\n");
+				printf("e culmino su reservacion de: mesa %d y computadora %d!\n\n", mesa, computadora);
+			}
+			else
+			{
+				printf("El lugar no esta reservado! Elige otro!\n");	
+			}
+		}
+		else
+		{
+			do
+			{
+				system("cls");
+				printf("Usted no esta dentro de la lista de personas para realizar una reserva\n");
+				printf("Desea volver a intentarlo?\n");
+				printf("Digite 1 para si, 0 para salir: ");
+				scanf("%d", &seleccion);
+				if (seleccion<0 || seleccion>1)
+				{
+					printf("No hay tal numero! Elige un numero entre el 0 y 1!\n");
+					system("PAUSE");
+					
+				}
+			} while (seleccion<0 || seleccion>1);
+			system("cls");
+		}
+	}while(seleccion==1);
 	printf("Presione cualquier tecla para regresar\n");
+}
+
+int ImprimirRegistro()
+{
+	
 }
 
 int ImprimirListado()  //Funcion para imprimir listado de personas con acceso a reservas
