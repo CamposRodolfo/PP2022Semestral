@@ -8,14 +8,19 @@
 #include<windows.h>
 
 //Constantes Globales          Puede cambiar el tamaño de las mesas y computadoras
-#define MESAS 6
-#define COMPUTADORAS 8
+#define MESAS 3
+#define COMPUTADORAS 4
 #define PERSONAS 20
 
 //Declaracion de Funciones
-int ImprimirLaboratorio(int mesas, int computadoras, int laboratorio[mesas][computadoras]);
-int ValidarNumero(int n);
-int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras]);
+int ImprimirLaboratorio(int mesas, int computadoras, int laboratorio[mesas][computadoras]);  //Funcion para imprimir Las mesas y computadoras
+int ValidarNumero(int n);  //Funcion para validar numero de entrada
+int VerificarCedula();  //Funcion para verficar acceso con cedula
+int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[mesas][mesas*computadoras]);  //Funcion para reservar computadora
+int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]);  //Funcion para cancelar reserva de computadora
+int ImprimirRegistro();  //Funcion que...
+int ImprimirListado();  //Funcion para imprimir listado de personas con acceso a reservas
+
 
 //Listado de Acceso
 char todasLasCedulas[PERSONAS][15]=
@@ -93,7 +98,7 @@ char todosLosApellidos[PERSONAS][15]=
 int main()
 {
 	//Declaracion de Variables
-	int rodolfo, adriana, seleccion, mesa, computadora, laboratorio[MESAS][COMPUTADORAS], registro[PERSONAS][MESAS*COMPUTADORAS];
+	int rodolfo, adriana, seleccion, mesa, computadora, laboratorio[MESAS][COMPUTADORAS], registro[PERSONAS][(MESAS*COMPUTADORAS)+1];
 	
 	//Valorando ArregloS
 	for (rodolfo=0; rodolfo<MESAS; rodolfo++)
@@ -106,7 +111,7 @@ int main()
 	
 	for (rodolfo=0; rodolfo<PERSONAS; rodolfo++)
 	{
-		for (adriana=0; adriana<MESAS*COMPUTADORAS; adriana++)
+		for (adriana=0; adriana<(MESAS*COMPUTADORAS)+1; adriana++)
 		{
 			registro[rodolfo][adriana] = 0;
 		}
@@ -141,7 +146,7 @@ int main()
 				system("PAUSE");
 				break;
 			case 4:
-				printf("Presione cualquier tecla para regresar\n");
+				ImprimirRegistro(MESAS, COMPUTADORAS, registro);
 				system("PAUSE");
 				break;
 			case 5:
@@ -255,7 +260,7 @@ int ValidarNumero(int n)  //Funcion para validar numero de entrada
 int VerificarCedula()  //Funcion para verficar acceso con cedula
 {
 	//Declaracion de Variables
-	int i, buscar;
+	int i, buscar, persona;
 	char cedula[15];
 	
 	//Bloque de instrucciones
@@ -263,34 +268,37 @@ int VerificarCedula()  //Funcion para verficar acceso con cedula
 	scanf("%s", &cedula);
 	for(i=0; i<PERSONAS; i++)
     {
-    	buscar = strcmp(cedula, todasLasCedulas[i])+1;
-        if(buscar == 1)
+    	buscar = strcmp(cedula, todasLasCedulas[i]);
+        if(buscar == 0)
     	{
-    		system("cls");
-            printf("%s %s tiene Acceso Confirmado!\n\n", todosLosNombres[i], todosLosApellidos[i]);
-            return i;
-            //registro[i]++;
+    		persona=i;
             break;
         }
-        else
-        {
-        	printf("no tiene Acceso");
-        	return 0;
-		}
     }
+    if(buscar == 0)
+    {
+    	system("cls");
+        printf("%s %s tiene Acceso Confirmado!\n\n", todosLosNombres[persona], todosLosApellidos[persona]);
+        return persona;
+    }
+    else
+    {
+        printf("no tiene Acceso\n");
+        return -1;
+	}
 }
 
-int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[mesas][mesas*computadoras])  //Funcion para reservar computadora
+int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[mesas][(mesas*computadoras)+1])  //Funcion para reservar computadora
 {
 	//Declaracion de variables
-	int persona, mesa, computadora, seleccion;
+	int persona, mesa, computadora, seleccion=0, rodolfo, adriana;
 	
 	//Bloque de Instrucciones
 	system("cls");
 	do
 	{
 		persona=VerificarCedula();
-		if(persona>1)
+		if(persona>=0)
 		{
 			ImprimirLaboratorio(mesas, computadoras, laboratorio);
 			printf("Para realizar una reserva, seleccione una mesa y una computadora.\n");
@@ -300,10 +308,14 @@ int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras], 
 			computadora=ValidarNumero(computadoras);
 			if (laboratorio[mesa-1][computadora-1] == 0)
 			{
-				registro [persona][((mesa-1)*computadora)+computadora]= 1;
-				laboratorio[mesa-1][computadora-1] = mesa;
-				printf("\n\nLa reserva fue exitosa!!\n");
+				system("cls");
+				laboratorio[mesa-1][computadora-1] = 1;
+				printf("La reserva fue exitosa!!\n");
 				printf("Su lugar reservado es: mesa %d y computadora %d! \n\n", mesa, computadora);
+				computadora=((mesa-1)*computadoras)+computadora;
+				registro[persona][computadora]= registro[persona][computadora]+1;
+				registro [persona][0]= registro [persona][0] + 1;
+				return registro;
 			}
 			else
 			{
@@ -349,7 +361,7 @@ int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 			mesa=ValidarNumero(mesas);
 			printf("Ingrese el numero de computadora: ");
 			computadora=ValidarNumero(computadoras);
-			if (laboratorio[mesa-1][computadora-1] == mesa)
+			if (laboratorio[mesa-1][computadora-1] == 1)
 			{
 				laboratorio[mesa-1][computadora-1] = 0;
 				printf("\n\nLa reserva fue cancelada con exito!\n");
@@ -382,9 +394,51 @@ int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 	printf("Presione cualquier tecla para regresar\n");
 }
 
-int ImprimirRegistro()
+int ImprimirRegistro(int mesas, int computadoras, int registro[mesas][(mesas*computadoras)+1])  //Funcion que...
 {
+	//Declacion de Variables
+	int i, j, k=0, registro2D[mesas][computadoras];
 	
+	//Valorando el arreglo registro2D a partir de registro  
+    for(i=0;i<mesas;i++)
+    {
+        for(j=0;j<computadoras;j++)
+        {
+            [i][j] = arr[k];
+            k++;
+        }
+    }
+	
+	//Bloque de Instrucciones
+	system("cls");
+	printf("Estas fueron las personas que reservaron computadoras:\n\n");
+	    
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            matrix[i][j] = arr[k];
+            k++;
+        }
+    }
+	for(i=0; i<PERSONAS; i++)
+	{
+		if(registro[i][0]>0)
+		{
+			printf("%s %s reservo estas computadoras:\n", todosLosNombres[i], todosLosApellidos[i]);
+			for(j=1; j<(mesas*computadoras)+1; j++)
+			{
+				if(registro[i][j]>0)
+				{
+					mesa = ((j-1)/mesas)+1;
+					computadora = ((j-1)%mesas)+1;
+					printf("    Mesa %d, Computadora %d:    %d veces.\n", mesa, computadora, registro[i][j]);
+				}
+			}
+			printf("    Con un total de:          %d reservas.\n\n", registro[i][0]);
+		}	
+	}
+		
 }
 
 int ImprimirListado()  //Funcion para imprimir listado de personas con acceso a reservas
