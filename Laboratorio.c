@@ -1,5 +1,6 @@
 //Semestral Principio de Programacion 2022;
 //Rodolfo Campos 8-905-2179, Adriana Achurra 8-990-123;
+//A:\Desktop\Semestral\PP2022Semestral\v1
 
 #include<stdio.h>
 #include<string.h>
@@ -7,8 +8,8 @@
 #include<windows.h>
 
 //Constantes Globales          Puede cambiar el tamaño de las mesas y computadoras
-#define MESAS 3
-#define COMPUTADORAS 4
+#define MESAS 6
+#define COMPUTADORAS 8
 #define PERSONAS 20
 
 //Declaracion de Funciones
@@ -92,14 +93,22 @@ char todosLosApellidos[PERSONAS][15]=
 int main()
 {
 	//Declaracion de Variables
-	int rodolfo, adriana, seleccion, mesa, computadora, laboratorio[MESAS][COMPUTADORAS];
+	int rodolfo, adriana, seleccion, mesa, computadora, laboratorio[MESAS][COMPUTADORAS], registro[PERSONAS][MESAS*COMPUTADORAS];
 	
-	//Valorando Arreglo
+	//Valorando ArregloS
 	for (rodolfo=0; rodolfo<MESAS; rodolfo++)
 	{
 		for (adriana=0; adriana<COMPUTADORAS; adriana++)
 		{
 			laboratorio[rodolfo][adriana] = 0;
+		}
+	}
+	
+	for (rodolfo=0; rodolfo<PERSONAS; rodolfo++)
+	{
+		for (adriana=0; adriana<MESAS*COMPUTADORAS; adriana++)
+		{
+			registro[rodolfo][adriana] = 0;
 		}
 	}
 	
@@ -124,7 +133,7 @@ int main()
 				system("PAUSE");
 				break;
 			case 2:
-				Reservar(MESAS, COMPUTADORAS, laboratorio);
+				Reservar(MESAS, COMPUTADORAS, laboratorio, registro);
 				system("PAUSE");
 				break;
 			case 3:
@@ -259,23 +268,29 @@ int VerificarCedula()  //Funcion para verficar acceso con cedula
     	{
     		system("cls");
             printf("%s %s tiene Acceso Confirmado!\n\n", todosLosNombres[i], todosLosApellidos[i]);
-            return buscar;
+            return i;
             //registro[i]++;
             break;
         }
+        else
+        {
+        	printf("no tiene Acceso");
+        	return 0;
+		}
     }
 }
 
-int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras])  //Funcion para reservar computadora
+int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[mesas][mesas*computadoras])  //Funcion para reservar computadora
 {
 	//Declaracion de variables
-	int mesa, computadora, seleccion;
+	int persona, mesa, computadora, seleccion;
 	
 	//Bloque de Instrucciones
 	system("cls");
 	do
 	{
-		if(VerificarCedula()==1)
+		persona=VerificarCedula();
+		if(persona>1)
 		{
 			ImprimirLaboratorio(mesas, computadoras, laboratorio);
 			printf("Para realizar una reserva, seleccione una mesa y una computadora.\n");
@@ -285,6 +300,7 @@ int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 			computadora=ValidarNumero(computadoras);
 			if (laboratorio[mesa-1][computadora-1] == 0)
 			{
+				registro [persona][((mesa-1)*computadora)+computadora]= 1;
 				laboratorio[mesa-1][computadora-1] = mesa;
 				printf("\n\nLa reserva fue exitosa!!\n");
 				printf("Su lugar reservado es: mesa %d y computadora %d! \n\n", mesa, computadora);
