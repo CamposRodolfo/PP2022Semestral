@@ -1,25 +1,25 @@
 //Semestral Principio de Programacion 2022;
 //Rodolfo Campos 8-905-2179, Adriana Achurra 8-990-123;
-//A:\Desktop\Semestral\PP2022Semestral\v1
 
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 #include<windows.h>
+#include<math.h>
 
-//Constantes Globales          Puede cambiar el tamaño de las mesas y computadoras
-#define MESAS 3
+//Constantes Globales				Puede cambiar el tamaño de las mesas y computadoras.
+#define MESAS 3						//Lo hicimos escalable a futuro cambiando las constantes a variables para una funcion de cambiar tamaño
 #define COMPUTADORAS 4
 #define PERSONAS 20
 
 //Declaracion de Funciones
-int ImprimirLaboratorio(int mesas, int computadoras, int laboratorio[mesas][computadoras]);  //Funcion para imprimir Las mesas y computadoras
-int ValidarNumero(int n);  //Funcion para validar numero de entrada
-int VerificarCedula();  //Funcion para verficar acceso con cedula
-int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[mesas][mesas*computadoras]);  //Funcion para reservar computadora
-int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]);  //Funcion para cancelar reserva de computadora
-int ImprimirRegistro();  //Funcion que...
-int ImprimirListado();  //Funcion para imprimir listado de personas con acceso a reservas
+int ImprimirLaboratorio(int mesas, int computadoras, int laboratorio[mesas][computadoras]);                       //Funcion para imprimir Las mesas y computadoras
+int ValidarNumero(int n);                                                                                         //Funcion para validar numero de entrada
+int VerificarCedula();                                                                                            //Funcion para verficar acceso con cedula
+int Reservar(int personas, int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[personas][(mesas*computadoras)+1]);  //Funcion para reservar computadora
+int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]);                                  //Funcion para cancelar reserva de computadora
+int ImprimirRegistro(int personas, int mesas, int computadoras, int registro[personas][(mesas*computadoras)+1]);  //Funcion para imprimir el registro de reservas
+int ImprimirListado();                                                                                            //Funcion para imprimir listado de personas con acceso a reservass
 
 
 //Listado de Acceso
@@ -138,7 +138,7 @@ int main()
 				system("PAUSE");
 				break;
 			case 2:
-				Reservar(MESAS, COMPUTADORAS, laboratorio, registro);
+				Reservar(PERSONAS, MESAS, COMPUTADORAS, laboratorio, registro);
 				system("PAUSE");
 				break;
 			case 3:
@@ -146,7 +146,7 @@ int main()
 				system("PAUSE");
 				break;
 			case 4:
-				ImprimirRegistro(MESAS, COMPUTADORAS, registro);
+				ImprimirRegistro(PERSONAS, MESAS, COMPUTADORAS, registro);
 				system("PAUSE");
 				break;
 			case 5:
@@ -288,7 +288,7 @@ int VerificarCedula()  //Funcion para verficar acceso con cedula
 	}
 }
 
-int Reservar(int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[mesas][(mesas*computadoras)+1])  //Funcion para reservar computadora
+int Reservar(int personas, int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[personas][(mesas*computadoras)+1])  //Funcion para reservar computadora
 {
 	//Declaracion de variables
 	int persona, mesa, computadora, seleccion=0, rodolfo, adriana;
@@ -394,51 +394,41 @@ int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]) 
 	printf("Presione cualquier tecla para regresar\n");
 }
 
-int ImprimirRegistro(int mesas, int computadoras, int registro[mesas][(mesas*computadoras)+1])  //Funcion que...
+int ImprimirRegistro(int personas, int mesas, int computadoras, int registro[personas][(mesas*computadoras)+1])  //Funcion para imprimir el registro de reservas
 {
 	//Declacion de Variables
-	int i, j, k=0, registro2D[mesas][computadoras];
-	
-	//Valorando el arreglo registro2D a partir de registro  
-    for(i=0;i<mesas;i++)
-    {
-        for(j=0;j<computadoras;j++)
-        {
-            [i][j] = arr[k];
-            k++;
-        }
-    }
+	int i, j, k, m, c, mesa, computadora, registro2D[mesas][computadoras]; //Nos toco revalorizar en otro arreglo 2D para hacer la imprecion, para no usar arreglos 3D
 	
 	//Bloque de Instrucciones
-	system("cls");
+	//system("cls");
 	printf("Estas fueron las personas que reservaron computadoras:\n\n");
-	    
-    for(i=0;i<row;i++)
-    {
-        for(j=0;j<col;j++)
-        {
-            matrix[i][j] = arr[k];
-            k++;
-        }
-    }
 	for(i=0; i<PERSONAS; i++)
 	{
 		if(registro[i][0]>0)
 		{
 			printf("%s %s reservo estas computadoras:\n", todosLosNombres[i], todosLosApellidos[i]);
-			for(j=1; j<(mesas*computadoras)+1; j++)
-			{
-				if(registro[i][j]>0)
-				{
-					mesa = ((j-1)/mesas)+1;
-					computadora = ((j-1)%mesas)+1;
-					printf("    Mesa %d, Computadora %d:    %d veces.\n", mesa, computadora, registro[i][j]);
-				}
-			}
-			printf("    Con un total de:          %d reservas.\n\n", registro[i][0]);
+			k=1;
+			for(m=0;m<mesas;m++)
+    		{
+        		for(c=0;c<computadoras;c++)
+        		{
+            		registro2D[m][c] = registro[i][k];
+            		k++;
+        		}
+    		}
+    		for(m=0;m<mesas;m++)
+    		{
+        		for(c=0;c<computadoras;c++)
+        		{
+        			if(registro2D[m][c]>0)
+        			{
+        				printf("    Mesa %d, Computadora %d:    %d veces.\n", m+1, c+1, registro2D[m][c]);
+					}
+        		}
+    		}
+    		printf("    Con un total de:          %d reservas.\n\n", registro[i][0]);
 		}	
-	}
-		
+	}		
 }
 
 int ImprimirListado()  //Funcion para imprimir listado de personas con acceso a reservas
