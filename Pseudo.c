@@ -1,30 +1,25 @@
-//Semestral Principio de Programacion 2022;
-//Rodolfo Campos 8-905-2179, Adriana Achurra 8-990-123;
+//Semestral Principio de Programacion 2022
+//Rohacerlfo Campos 8-905-2179, Adriana Achurra 8-990-123;
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<windows.h>
-#include<math.h>
 
-//Constantes Globales				Puede cambiar el tamaño de las mesas y computadoras.
+//Declaracion de Constantes Globales				Puede cambiar el tamaño de las mesas y computadoras.
 #define MESAS 3						//Lo hicimos escalable a futuro cambiando las constantes a variables para una funcion de cambiar tamaño
 #define COMPUTADORAS 4
 #define PERSONAS 20
 
 //Declaracion de Funciones
-int ImprimirBanner();
-int ImprimirLaboratorio(int mesas, int computadoras, int laboratorio[mesas][computadoras]);                       //Funcion para imprimir Las mesas y computadoras
-int ValidarNumero(int n);                                                                                         //Funcion para validar numero de entrada
-int VerificarCedula();                                                                                            //Funcion para verficar acceso con cedula
-int Reservar(int personas, int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[personas][(mesas*computadoras)+1]);  //Funcion para reservar computadora
-int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras]);                                  //Funcion para cancelar reserva de computadora
-int ImprimirRegistro(int personas, int mesas, int computadoras, int registro[personas][(mesas*computadoras)+1]);  //Funcion para imprimir el registro de reservas
-int ImprimirListado();                                                                                            //Funcion para imprimir listado de personas con acceso a reservass
+entero ImprimirBanner();
+entero ImprimirLaboratorio(entero mesas, entero computadoras, entero laboratorio[mesas][computadoras]);                       //Funcion para imprimir Las mesas y computadoras
+entero ValidarNumero(entero n);                                                                                         //Funcion para validar numero de entrada
+entero VerificarCedula();                                                                                            //Funcion para verficar acceso con cedula
+entero Reservar(entero personas, entero mesas, entero computadoras, entero laboratorio[mesas][computadoras], entero registro[personas][(mesas*computadoras)+1]);  //Funcion para reservar computadora
+entero Cancelar(entero mesas, entero computadoras, entero laboratorio[mesas][computadoras]);                                  //Funcion para cancelar reserva de computadora
+entero ImprimirRegistro(entero personas, entero mesas, entero computadoras, entero registro[personas][(mesas*computadoras)+1]);  //Funcion para imprimir el registro de reservas
+entero ImprimirListado();                                                                                            //Funcion para imprimir listado de personas con acceso a reservass
 
 
 //Listado de Acceso
-char todasLasCedulas[PERSONAS][15]=
+caracter todasLasCedulas[PERSONAS][15]=
 {
 	"8-756-2131",
 	"8-905-2179",
@@ -48,7 +43,7 @@ char todasLasCedulas[PERSONAS][15]=
 	"8-1001-1046"
 };
 	
-char todosLosNombres[PERSONAS][15]=
+caracter todosLosNombres[PERSONAS][15]=
 {
 	"Kexy",
 	"Rodolfo",
@@ -72,7 +67,7 @@ char todosLosNombres[PERSONAS][15]=
 	"Moises"
 };
 
-char todosLosApellidos[PERSONAS][15]=
+caracter todosLosApellidos[PERSONAS][15]=
 {
 	"Rodriguez",
 	"Campos",
@@ -96,520 +91,520 @@ char todosLosApellidos[PERSONAS][15]=
 	"Delgado"
 };
 
-int main()
+Algoritmo SemestralPrincipiosDeProgramacion
 {
 	//Declaracion de Variables
-	int rodolfo, adriana, seleccion, mesa, computadora, laboratorio[MESAS][COMPUTADORAS], registro[PERSONAS][(MESAS*COMPUTADORAS)+1];
+	entero rodolfo, adriana, seleccion, mesa, computadora, laboratorio[MESAS][COMPUTADORAS], registro[PERSONAS][(MESAS*COMPUTADORAS)+1];
 	
 	//Valorando ArregloS
-	for (rodolfo=0; rodolfo<MESAS; rodolfo++)
+	para (rodolfo=0; rodolfo<MESAS; rodolfo++)
 	{
-		for (adriana=0; adriana<COMPUTADORAS; adriana++)
+		para (adriana=0; adriana<COMPUTADORAS; adriana++)
 		{
 			laboratorio[rodolfo][adriana] = 0;
 		}
 	}
 	
-	for (rodolfo=0; rodolfo<PERSONAS; rodolfo++)
+	para (rodolfo=0; rodolfo<PERSONAS; rodolfo++)
 	{
-		for (adriana=0; adriana<(MESAS*COMPUTADORAS)+1; adriana++)
+		para (adriana=0; adriana<(MESAS*COMPUTADORAS)+1; adriana++)
 		{
 			registro[rodolfo][adriana] = 0;
 		}
 	}
 	
 	//Ciclo Principal
-	do
+	hacer
 	{
-		system("cls");
-		printf("\n");
+		sistema("limpiar");
+		imprimir("\n");
 		ImprimirBanner();
-		printf(" BIENVENIDO AL LABORATORIO DE COMPUTO!\n\n");
-		printf(" Seleccione una de las siguientes opciones para continuar:\n\n");
-		printf("  1. Ver los puestos de las computadoras ocupadas y disponibles.\n");
-		printf("  2. Reservar una computadora.\n");
-		printf("  3. Salir del laboratorio.\n");
-		printf("  4. Registro del uso del laboratorio.\n");
-		printf("  5. Ver el listado de los estudiantes autorizado para usar el laboratorio.\n");
-		printf("  6. Salir del sistema.\n\n");
-		printf(" Seleccion: ");
-		scanf("%d", &seleccion);
-		switch(seleccion)
+		imprimir(" BIENVENIDO AL LABORATORIO DE COMPUTO!\n\n");
+		imprimir(" Seleccione una de las siguientes opciones para continuar:\n\n");
+		imprimir("  1. Ver los puestos de las computadoras ocupadas y disponibles.\n");
+		imprimir("  2. Reservar una computadora.\n");
+		imprimir("  3. Salir del laboratorio.\n");
+		imprimir("  4. Registro del uso del laboratorio.\n");
+		imprimir("  5. Ver el listado de los estudiantes autorizado para usar el laboratorio.\n");
+		imprimir("  6. Salir del sistema.\n\n");
+		imprimir(" Seleccion: ");
+		leer(seleccion);
+		segun(seleccion)
 		{
-			case 1:
-				system("cls");
+			  1:
+				sistema("limpiar");
 				ImprimirLaboratorio(MESAS, COMPUTADORAS, laboratorio);
-				printf("Presione cualquier tecla para regresar\n");
-				system("PAUSE");
-				break;
-			case 2:
+				imprimir("Presione cualquier tecla para regresar\n");
+				sistema("PAUSA");
+				;
+			  2:
 				Reservar(PERSONAS, MESAS, COMPUTADORAS, laboratorio, registro);
-				system("PAUSE");
-				break;
-			case 3:
+				sistema("PAUSA");
+				;
+			  3:
 				Cancelar(MESAS, COMPUTADORAS, laboratorio);
-				system("PAUSE");
-				break;
-			case 4:
+				sistema("PAUSA");
+				;
+			  4:
 				ImprimirRegistro(PERSONAS, MESAS, COMPUTADORAS, registro);
-				system("PAUSE");
-				break;
-			case 5:
+				sistema("PAUSA");
+				;
+			  5:
 				ImprimirListado();
-					system("PAUSE");
-				break;
-			case 6:
+					sistema("PAUSA");
+				;
+			  6:
 				ImprimirFin();
-				break;
-			default:
-				printf("\n\033[31m >> inserte un numero valido <<\033[0m\n");
-				system("PAUSE");
+				;
+			de otro modo:
+				imprimir("\n\033[31m >> inserte un numero valido <<\033[0m\n");
+				sistema("PAUSA");
 		}
-	}while (seleccion!=6);
-	return 0;
+	}mientras (seleccion!=6);
+	retornar 0;
 }
 
-int ImprimirBanner()
+entero ImprimirBanner()
 {
-	printf(" \033[90m'\033[33m##\033[90m::::::::::'\033[33m###\033[90m::::'\033[33m########\033[90m:::'\033[33m#######\033[90m::'\033[33m########\033[90m:::::'\033[33m###\033[90m::::'\033[33m########\033[90m::'\033[33m#######\033[90m::'\033[33m########\033[90m::'\033[33m####\033[90m::'\033[33m#######\033[90m::\n");
-	printf(" \033[90m \033[33m##\033[90m:::::::::'\033[33m##\033[90m \033[33m##\033[90m::: \033[33m##\033[90m.... \033[33m##\033[90m:'\033[33m##\033[90m.... \033[33m##\033[90m: \033[33m##\033[90m.... \033[33m##\033[90m:::'\033[33m##\033[90m \033[33m##\033[90m:::... \033[33m##\033[90m..::'\033[33m##\033[90m.... \033[33m##\033[90m: \033[33m##\033[90m.... \033[33m##\033[90m:. \033[33m##\033[90m::'\033[33m##\033[90m.... \033[33m##\033[90m:\n");
-	printf(" \033[90m \033[33m##\033[90m::::::::'\033[33m##\033[90m:. \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m::'\033[33m##\033[90m:. \033[33m##\033[90m::::: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m:: \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m:\n");
-	printf(" \033[90m \033[33m##\033[90m:::::::'\033[33m##\033[90m:::. \033[33m##\033[90m: \033[33m########\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m########\033[90m::'\033[33m##\033[90m:::. \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m########\033[90m::: \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m:\n");
-	printf(" \033[90m \033[33m##\033[90m::::::: \033[33m#########\033[90m: \033[33m##\033[90m.... \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m.. \033[33m##\033[90m::: \033[33m#########\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m.. \033[33m##\033[90m:::: \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m:\n");
-	printf(" \033[90m \033[33m##\033[90m::::::: \033[33m##\033[90m.... \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m::. \033[33m##\033[90m:: \033[33m##\033[90m.... \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m::. \033[33m##\033[90m::: \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m:\n");
-	printf(" \033[90m \033[33m########\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m########\033[90m::. \033[33m#######\033[90m:: \033[33m##\033[90m:::. \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m::::. \033[33m#######\033[90m:: \033[33m##\033[90m:::. \033[33m##\033[90m:'\033[33m####\033[90m:. \033[33m#######\033[90m::\n");
-	printf(" \033[90m........::..:::::..::........::::.......:::..:::::..::..:::::..:::::..::::::.......:::..:::::..::....:::.......:::\033[0m\n\n");
+	imprimir(" \033[90m'\033[33m##\033[90m::::::::::'\033[33m###\033[90m::::'\033[33m########\033[90m:::'\033[33m#######\033[90m::'\033[33m########\033[90m:::::'\033[33m###\033[90m::::'\033[33m########\033[90m::'\033[33m#######\033[90m::'\033[33m########\033[90m::'\033[33m####\033[90m::'\033[33m#######\033[90m::\n");
+	imprimir(" \033[90m \033[33m##\033[90m:::::::::'\033[33m##\033[90m \033[33m##\033[90m::: \033[33m##\033[90m.... \033[33m##\033[90m:'\033[33m##\033[90m.... \033[33m##\033[90m: \033[33m##\033[90m.... \033[33m##\033[90m:::'\033[33m##\033[90m \033[33m##\033[90m:::... \033[33m##\033[90m..::'\033[33m##\033[90m.... \033[33m##\033[90m: \033[33m##\033[90m.... \033[33m##\033[90m:. \033[33m##\033[90m::'\033[33m##\033[90m.... \033[33m##\033[90m:\n");
+	imprimir(" \033[90m \033[33m##\033[90m::::::::'\033[33m##\033[90m:. \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m::'\033[33m##\033[90m:. \033[33m##\033[90m::::: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m:: \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m:\n");
+	imprimir(" \033[90m \033[33m##\033[90m:::::::'\033[33m##\033[90m:::. \033[33m##\033[90m: \033[33m########\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m########\033[90m::'\033[33m##\033[90m:::. \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m########\033[90m::: \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m:\n");
+	imprimir(" \033[90m \033[33m##\033[90m::::::: \033[33m#########\033[90m: \033[33m##\033[90m.... \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m.. \033[33m##\033[90m::: \033[33m#########\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m.. \033[33m##\033[90m:::: \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m:\n");
+	imprimir(" \033[90m \033[33m##\033[90m::::::: \033[33m##\033[90m.... \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m::. \033[33m##\033[90m:: \033[33m##\033[90m.... \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m##\033[90m::. \033[33m##\033[90m::: \033[33m##\033[90m:: \033[33m##\033[90m:::: \033[33m##\033[90m:\n");
+	imprimir(" \033[90m \033[33m########\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m: \033[33m########\033[90m::. \033[33m#######\033[90m:: \033[33m##\033[90m:::. \033[33m##\033[90m: \033[33m##\033[90m:::: \033[33m##\033[90m:::: \033[33m##\033[90m::::. \033[33m#######\033[90m:: \033[33m##\033[90m:::. \033[33m##\033[90m:'\033[33m####\033[90m:. \033[33m#######\033[90m::\n");
+	imprimir(" \033[90m........::..:::::..::........::::.......:::..:::::..::..:::::..:::::..::::::.......:::..:::::..::....:::.......:::\033[0m\n\n");
 }
 
-int ImprimirLaboratorio(int mesas, int computadoras, int laboratorio[mesas][computadoras])  //Funcion para imprimir Las mesas y computadoras
+entero ImprimirLaboratorio(entero mesas, entero computadoras, entero laboratorio[mesas][computadoras])  //Funcion para imprimir Las mesas y computadoras
 {
 	//Declaracion de Variables
-	int m, c;
+	entero m, c;
 	
 	//Bloque de Instrucciones
-	printf("\n\033[33m                    TABLA DE PUESTOS DE COMPUTADORAS DISPINIBLES.\033[0m\n\n");
+	imprimir("\n\033[33m                    TABLA DE PUESTOS DE COMPUTADORAS DISPINIBLES.\033[0m\n\n");
 	
-	for (m=0; m<mesas; m++)
+	para (m=0; m<mesas; m++)
 	{
-		printf("\033[33m Mesa %d\033[0m:  \n ", m+1);
-		for (c=0; c<computadoras; c++)
+		imprimir("\033[33m Mesa %d\033[0m:  \n ", m+1);
+		para (c=0; c<computadoras; c++)
 		{
-			printf("_____________________");
+			imprimir("_____________________");
 		}
-		printf("_\n");
-		printf("| ");
-		for (c=0; c<computadoras; c++)
+		imprimir("_\n");
+		imprimir("| ");
+		para (c=0; c<computadoras; c++)
 		{
-			printf("____________________ ");
+			imprimir("____________________ ");
 		}
-		printf("|\n||");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n||");
+		para (c=0; c<computadoras; c++)
 		{
-			printf("  ___________   __  |");
+			imprimir("  ___________   __  |");
 		}
-		printf("|\n||");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n||");
+		para (c=0; c<computadoras; c++)
 		{
-			printf(" |           | |==| |");
+			imprimir(" |           | |==| |");
 		}
-		printf("|\n||");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n||");
+		para (c=0; c<computadoras; c++)
 		{
-			printf(" |     %d     | |--| |", c+1);
+			imprimir(" |     %d     | |--| |", c+1);
 		}
-		printf("|\n||");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n||");
+		para (c=0; c<computadoras; c++)
 		{
-			printf(" |___________| |  | |");
+			imprimir(" |___________| |  | |");
 		}
-		printf("|\n||");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n||");
+		para (c=0; c<computadoras; c++)
 		{
-			printf("      | |      |--| |");
+			imprimir("      | |      |--| |");
 		}
-		printf("|\n||");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n||");
+		para (c=0; c<computadoras; c++)
 		{
-			printf("  ===========  |__| |");
+			imprimir("  ===========  |__| |");
 		}
-		printf("|\n||");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n||");
+		para (c=0; c<computadoras; c++)
 		{
-			if(laboratorio[m][c]==0)
+			si(laboratorio[m][c]==0)
 			{	
-				printf("  \033[32m Disponible \033[0m      |");
+				imprimir("  \033[32m Disponible \033[0m      |");
 			}
-			else if(laboratorio[m][c]>0)
+			de otro modo si(laboratorio[m][c]>0)
 			{
-				printf(" \033[31m No Disponible \033[0m    |");
+				imprimir(" \033[31m No Disponible \033[0m    |");
 			}
 		}
-		printf("|\n||");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n||");
+		para (c=0; c<computadoras; c++)
 		{
-			printf("____________________|");
+			imprimir("____________________|");
 		}
-		printf("|\n|_");
-		for (c=0; c<computadoras; c++)
+		imprimir("|\n|_");
+		para (c=0; c<computadoras; c++)
 		{
-			printf("_____________________");
+			imprimir("_____________________");
 		}
-		printf("|\n\n");
+		imprimir("|\n\n");
 	}
 }
 
-int ValidarNumero(int n)  //Funcion para validar numero de entrada
+entero ValidarNumero(entero n)  //Funcion para validar numero de entrada
 {
 	//Declaracion de Variable
-	int i;
+	entero i;
 	
 	//Bloque de Instrucciones
-	do
+	hacer
 	{	
-		scanf("%d", &i);
-		if (i<1 || i>n)
+		leer(i);
+		si (i<1 || i>n)
 		{
-			printf("\n\033[31m >>No hay tal numero! Elige un numero entre el 1 al %d!<<\033[0m\n", n);
-			printf("Ingrese nuevamente el numero: ");
+			imprimir("\n\033[31m >>No hay tal numero! Elige un numero entre el 1 al %d!<<\033[0m\n", n);
+			imprimir("Ingrese nuevamente el numero: ");
 		}
-	} while (i<1 || i>n);
-	return i;
+	} mientras (i<1 || i>n);
+	retornar i;
 }
 
-int VerificarCedula()  //Funcion para verficar acceso con cedula
+entero VerificarCedula()  //Funcion para verficar acceso con cedula
 {
 	//Declaracion de Variables
-	int i, buscar, persona;
-	char cedula[15];
+	entero i, buscar, persona;
+	caracter cedula[15];
 	
 	//Bloque de instrucciones
-	printf("Ingrese su numero de cedula: ");
-	scanf("%s", &cedula);
-	for(i=0; i<PERSONAS; i++)
+	imprimir("Ingrese su numero de cedula: ");
+	leer(cedula);
+	para(i=0; i<PERSONAS; i++)
     {
     	buscar = strcmp(cedula, todasLasCedulas[i]);
-        if(buscar == 0)
+        si(buscar == 0)
     	{
     		persona=i;
-            break;
+            ;
         }
     }
-    if(buscar == 0)
+    si(buscar == 0)
     {
-    	system("cls");
-        printf("\n                      %s %s tiene Acceso Confirmado!\n\n", todosLosNombres[persona], todosLosApellidos[persona]);
-        return persona;
+    	sistema("limpiar");
+        imprimir("\n                      %s %s tiene Acceso Confirmado!\n\n", todosLosNombres[persona], todosLosApellidos[persona]);
+        retornar persona;
     }
-    else
+    de otro modo
     {
-        printf("no tiene Acceso\n");
-        return -1;
+        imprimir("no tiene Acceso\n");
+        retornar -1;
 	}
 }
 
-int Reservar(int personas, int mesas, int computadoras, int laboratorio[mesas][computadoras], int registro[personas][(mesas*computadoras)+1])  //Funcion para reservar computadora
+entero Reservar(entero personas, entero mesas, entero computadoras, entero laboratorio[mesas][computadoras], entero registro[personas][(mesas*computadoras)+1])  //Funcion para reservar computadora
 {
 	//Declaracion de variables
-	int persona, mesa, computadora, seleccion=0;
+	entero persona, mesa, computadora, seleccion=0;
 	
 	//Bloque de Instrucciones
-	system("cls");
-	do
+	sistema("limpiar");
+	hacer
 	{
 		persona=VerificarCedula();
-		if(persona>=0)
+		si(persona>=0)
 		{
 			ImprimirLaboratorio(mesas, computadoras, laboratorio);
-			printf("Para realizar una reserva, seleccione una mesa y una computadora.\n");
-			printf("Ingrese el numero de mesa: ");
+			imprimir("Para realizar una reserva, seleccione una mesa y una computadora.\n");
+			imprimir("Ingrese el numero de mesa: ");
 			mesa=ValidarNumero(mesas);
-			printf("Ingrese el numero de computadora: ");
+			imprimir("Ingrese el numero de computadora: ");
 			computadora=ValidarNumero(computadoras);
-			if (laboratorio[mesa-1][computadora-1] == 0)
+			si (laboratorio[mesa-1][computadora-1] == 0)
 			{
-				system("cls");
+				sistema("limpiar");
 				laboratorio[mesa-1][computadora-1] = 1;
-				system("cls");
-				printf("  __^__                                      __^__\n");
-				printf(" ( ___ )------------------------------------( ___ )\n");
-				printf("  | / |                                      | \\ |\n");
-				printf("  | / |       \033[32mLA RESERVA FUE EXITOSA!!!\033[0m      | \\ |\n");
-				printf("  |   |                                      |   |\n");
-				printf("  | / |       Su lugar reservado es:         | \\ |\n");
-				printf("  | / |       mesa %d y computadora %d!        | \\ |\n", mesa, computadora);
-				printf("  |___|                                      |___|\n");
-				printf(" (_____)------------------------------------(_____)\n"); 
+				sistema("limpiar");
+				imprimir("  __^__                                      __^__\n");
+				imprimir(" ( ___ )------------------------------------( ___ )\n");
+				imprimir("  | / |                                      | \\ |\n");
+				imprimir("  | /  \033[32mLA RESERVA FUE EXITOSA!!!\033[0m      | \\ |\n");
+				imprimir("  |   |                                      |   |\n");
+				imprimir("  | / |       Su lugar reservado es:         | \\ |\n");
+				imprimir("  | / |       mesa ", mesa, " y computadora", computadora, "         | \\ |\n");
+				imprimir("  |___|                                      |___|\n");
+				imprimir(" (_____)------------------------------------(_____)\n"); 
 				computadora=((mesa-1)*computadoras)+computadora;
 				registro[persona][computadora]= registro[persona][computadora]+1;
 				registro [persona][0]= registro [persona][0] + 1;
-				return registro;
+				retornar registro;
 			}
-			else
+			de otro modo
 			{
-				printf("\n\033[31m >>El lugar esta ocupado! ¡Elige otro!<<\033[0m\n");	
+				imprimir("\n\033[31m >>El lugar esta ocupado! ¡Elige otro!<<\033[0m\n");	
 			}
 		}
-		else
+		de otro modo
 		{
-			do
+			hacer
 			{
-				system("cls");
-				printf("Usted no esta dentro de la lista de personas para realizar una reserva\n");
-				printf("Desea volver a intentarlo?\n");
-				printf("Digite 1 para si, 0 para salir: ");
-				scanf("%d", &seleccion);
-				if (seleccion<0 || seleccion>1)
+				sistema("limpiar");
+				imprimir("Usted no esta dentro de la lista de personas para realizar una reserva\n");
+				imprimir("Desea volver a enteroentarlo?\n");
+				imprimir("Digite 1 para si, 0 para salir: ");
+				leer(seleccion);
+				si (seleccion<0 || seleccion>1)
 				{
-					printf("\n\033[31m >>No hay tal numero! Elige un numero entre el 0 y 1!<<\033[0m\n");
-					system("PAUSE");
+					imprimir("\n\033[31m >>No hay tal numero! Elige un numero entre el 0 y 1!<<\033[0m\n");
+					sistema("PAUSA");
 					
 				}
-			} while (seleccion<0 || seleccion>1);
-			system("cls");
+			} mientras (seleccion<0 || seleccion>1);
+			sistema("limpiar");
 		}
-	}while(seleccion==1);
-	printf("Presione cualquier tecla para regresar\n");
+	}mientras(seleccion==1);
+	imprimir("Presione cualquier tecla para regresar\n");
 }
 	
-int Cancelar(int mesas, int computadoras, int laboratorio[mesas][computadoras])  //Funcion para cancelar reserva de computadora
+entero Cancelar(entero mesas, entero computadoras, entero laboratorio[mesas][computadoras])  //Funcion para cancelar reserva de computadora
 {
 	//Declaracion de variables
-	int mesa, computadora, persona, seleccion;
+	entero mesa, computadora, persona, seleccion;
 	
 	//Bloque de Instrucciones
-	system("cls");
-	do
+	sistema("limpiar");
+	hacer
 	{
 		persona=VerificarCedula();
-		if(persona>=0)
+		si(persona>=0)
 		{
 			ImprimirLaboratorio(mesas, computadoras, laboratorio);
-			printf("Para culminar una reserva, seleccione una mesa y una computadora.\n");
-			printf("Ingrese el numero de mesa: ");
+			imprimir("Para culminar una reserva, seleccione una mesa y una computadora.\n");
+			imprimir("Ingrese el numero de mesa: ");
 			mesa=ValidarNumero(mesas);
-			printf("Ingrese el numero de computadora: ");
+			imprimir("Ingrese el numero de computadora: ");
 			computadora=ValidarNumero(computadoras);
-			if (laboratorio[mesa-1][computadora-1] == 1)
+			si (laboratorio[mesa-1][computadora-1] == 1)
 			{
 				laboratorio[mesa-1][computadora-1] = 0;
-				system("cls");
-				printf("  __^__                                      __^__\n");
-				printf(" ( ___ )------------------------------------( ___ )\n");
-				printf("  | / |                                      | \\ |\n");
-				printf("  | / |            \033[32mLA RESERVA SE\033[0m             | \\ |\n");
-				printf("  | / |         \033[32mCANCELO CON EXITO!!!\033[0m         | \\ |\n");
-				printf("  |   |                                      |   |\n");
-				printf("  | / |     Se culmino su reservacion de:    | \\ |\n");
-				printf("  | / |        mesa %d y computadora %d!       | \\ |\n", mesa, computadora);
-				printf("  |___|                                      |___|\n");
-				printf(" (_____)------------------------------------(_____)\n"); 
+				sistema("limpiar");
+				imprimir("  __^__                                      __^__\n");
+				imprimir(" ( ___ )------------------------------------( ___ )\n");
+				imprimir("  | / |                                      | \\ |\n");
+				imprimir("  | / |            \033[32mLA RESERVA SE\033[0m             | \\ |\n");
+				imprimir("  | / |         \033[32mCANCELO CON EXITO!!!\033[0m         | \\ |\n");
+				imprimir("  |   |                                      |   |\n");
+				imprimir("  | / |     Se culmino su reservacion de:    | \\ |\n");
+				imprimir("  | / |        mesa" , mesa "y computadora" computafora "       | \\ |\n");
+				imprimir("  |___|                                      |___|\n");
+				imprimir(" (_____)------------------------------------(_____)\n"); 
 			}
-			else
+			de otro modo
 			{
-				printf("\n\033[31m >>El lugar no esta reservado! Elige otro!<<\033[0m\n");	
+				imprimir("\n\033[31m >>El lugar no esta reservado! Elige otro!<<\033[0m\n");	
 			}
 		}
-		else
+		de otro modo
 		{
-			do
+			hacer
 			{
-				system("cls");
-				printf("Usted no esta dentro de la lista de personas para realizar una reserva\n");
-				printf("Desea volver a intentarlo?\n");
-				printf("Digite 1 para si, 0 para salir: ");
-				scanf("%d", &seleccion);
-				if (seleccion<0 || seleccion>1)
+				sistema("limpiar");
+				imprimir("Usted no esta dentro de la lista de personas para realizar una reserva\n");
+				imprimir("Desea volver a enteroentarlo?\n");
+				imprimir("Digite 1 para si, 0 para salir: ");
+				leer(seleccion);
+				si (seleccion<0 || seleccion>1)
 				{
-					printf("\n\033[31m >>No hay tal numero! Elige un numero entre el 0 y 1!<<\033[0m\n");
-					system("PAUSE");
+					imprimir("\n\033[31m >>No hay tal numero! Elige un numero entre el 0 y 1!<<\033[0m\n");
+					sistema("PAUSA");
 					
 				}
-			} while (seleccion<0 || seleccion>1);
-			system("cls");
+			} mientras (seleccion<0 || seleccion>1);
+			sistema("limpiar");
 		}
-	}while(seleccion==1);
-	printf("Presione cualquier tecla para regresar\n");
+	}mientras(seleccion==1);
+	imprimir("Presione cualquier tecla para regresar\n");
 }
 
-int ImprimirRegistro(int personas, int mesas, int computadoras, int registro[personas][(mesas*computadoras)+1])  //Funcion para imprimir el registro de reservas
+entero ImprimirRegistro(entero personas, entero mesas, entero computadoras, entero registro[personas][(mesas*computadoras)+1])  //Funcion para imprimir el registro de reservas
 {
 	//Declacion de Variables
-	int i, j, k, m, c, mesa, computadora, registro2D[mesas][computadoras]; //Nos toco revalorizar en otro arreglo 2D para hacer la imprecion, para no usar arreglos 3D
+	entero i, j, k, m, c, mesa, computadora, registro2D[mesas][computadoras]; //Nos toco revalorizar en otro arreglo 2D para hacer la imprecion, para no usar arreglos 3D
 	
 	//Bloque de Instrucciones
-	system("cls");
-	printf("\n Estas fueron las personas que reservaron computadoras:\n\n");
-	printf("  __________________________________________ \n");
-	printf(" | ________________________________________ |\n");
+	sistema("limpiar");
+	imprimir("\n Estas fueron las personas que reservaron computadoras:\n\n");
+	imprimir("  __________________________________________ \n");
+	imprimir(" | ________________________________________ |\n");
 
-	for(i=0; i<PERSONAS; i++)
+	para(i=0; i<PERSONAS; i++)
 	{
-		if(registro[i][0]>0)
+		si(registro[i][0]>0)
 		{
-			if(i+1<10)
+			si(i+1<10)
 			{
-				printf(" ||\033[32m#0%d %s %s \033[0m", i+1, todosLosNombres[i], todosLosApellidos[i]);
-				for(j=0; j<34-(strlen(todosLosNombres[i])+strlen(todosLosApellidos[i])); j++)
+				imprimir(" ||\033[32m#0%d %s %s \033[0m", i+1, todosLosNombres[i], todosLosApellidos[i]);
+				para(j=0; j<34-(strlen(todosLosNombres[i])+strlen(todosLosApellidos[i])); j++)
 				{
-					printf(" ");
+					imprimir(" ");
 				}
 			}
-			else if(i+1>=10 && i+1<100)
+			de otro modo si(i+1>=10 && i+1<100)
 			{
-				printf(" ||\033[32m#%d %s %s \033[0m", i+1, todosLosNombres[i], todosLosApellidos[i]);
-				for(j=0; j<34-(strlen(todosLosNombres[i])+strlen(todosLosApellidos[i])); j++)
+				imprimir(" ||\033[32m#%d %s %s \033[0m", i+1, todosLosNombres[i], todosLosApellidos[i]);
+				para(j=0; j<34-(strlen(todosLosNombres[i])+strlen(todosLosApellidos[i])); j++)
 				{
-					printf(" ");
+					imprimir(" ");
 				}
 			}
-			else
+			de otro modo
 			{
-				printf(" ||\033[32m#%d %s %s \033[0m", i+1, todosLosNombres[i], todosLosApellidos[i]);
-				for(j=0; j<33-(strlen(todosLosNombres[i])+strlen(todosLosApellidos[i])); j++)
+				imprimir(" ||\033[32m#%d %s %s \033[0m", i+1, todosLosNombres[i], todosLosApellidos[i]);
+				para(j=0; j<33-(strlen(todosLosNombres[i])+strlen(todosLosApellidos[i])); j++)
 				{
-					printf(" ");
+					imprimir(" ");
 				}
 			}
 			
-			printf("||\n");
-			printf(" ||========================================||\n");
-			printf(" || Reservo estas computadoras:            ||\n");
+			imprimir("||\n");
+			imprimir(" ||========================================||\n");
+			imprimir(" || Reservo estas computadoras:            ||\n");
 			k=1;
-			for(m=0;m<mesas;m++)
+			para(m=0;m<mesas;m++)
     		{
-        		for(c=0;c<computadoras;c++)
+        		para(c=0;c<computadoras;c++)
         		{
             		registro2D[m][c] = registro[i][k];
             		k++;
         		}
     		}
-    		for(m=0;m<mesas;m++)
+    		para(m=0;m<mesas;m++)
     		{
-        		for(c=0;c<computadoras;c++)
+        		para(c=0;c<computadoras;c++)
         		{
-        			if(registro2D[m][c]>0)
+        			si(registro2D[m][c]>0)
         			{
-        				if(m+1<10)
+        				si(m+1<10)
         				{
-        					printf(" ||    Mesa %d, Computadora %d:   %d veces.   ||\n", m+1, c+1, registro2D[m][c]);
+        					imprimir(" ||    Mesa", m+1 "Computadora : " c+1 , registro2D[m][c] "veces.   ||\n");
 						}
-						else
+						de otro modo
 						{
-							printf(" ||    Mesa %d, Computadora %d:  %d veces.   ||\n", m+1, c+1, registro2D[m][c]);
+							imprimir(" ||    Mesa", m+1 "Computadora : " c+1 , registro2D[m][c] "veces.   ||\n");
 						}
         				
 					}
         		}
     		}
-    		if(registro[i][0]<10)
+    		si(registro[i][0]<10)
     		{
-    			printf(" ||    con un total de:         %d reservas.||\n", registro[i][0]);
+    			imprimir(" ||    con un total de: " , registro[i][0]         "reservas.||\n");
 			}
-			else
+			de otro modo
 			{
-    			printf(" ||    con un total de:         %d reservas.||\n", registro[i][0]);
+    			imprimir(" ||    con un total de: ", registro[i][0]         "reservas.||\n");
     		}
-    		printf(" ||________________________________________||\n");
+    		imprimir(" ||________________________________________||\n");
 		}
 	}
-	printf(" |__________________________________________|\n\n");
-	printf("Presione cualquier tecla para regresar\n");		
+	imprimir(" |__________________________________________|\n\n");
+	imprimir("Presione cualquier tecla para regresar\n");		
 }
 
-int ImprimirListado()  //Funcion para imprimir listado de personas con acceso a reservas
+entero ImprimirListado()  //Funcion para imprimir listado de personas con acceso a reservas
 {
 	//Declaracion de Variables
-	int i, j, k;
+	entero i, j, k;
 	
 	//Bloque de Instrucciones
-	system("cls");
-	printf("Este es el listado de las personas autorizadas.\n");
-	printf("  __________________________________________ \n");
-	printf(" | ________________________________________ |\n");
-	printf(" ||\033[32m #n  Nombres    Apellidos  Cedulas      \033[0m||\n");
-	printf(" ||========================================||\n");
-	for(i=0;i<PERSONAS; i++)
+	sistema("limpiar");
+	imprimir("Este es el listado de las personas autorizadas.\n");
+	imprimir("  __________________________________________ \n");
+	imprimir(" | ________________________________________ |\n");
+	imprimir(" ||\033[32m #n  Nombres    Apellidos  Cedulas      \033[0m||\n");
+	imprimir(" ||========================================||\n");
+	para(i=0;i<PERSONAS; i++)
 	{
-		printf(" || ");
-		if(i+1>=10)
+		imprimir(" || ");
+		si(i+1>=10)
 		{
-			printf("\033[33m%d\033[0m  ", i+1);
+			imprimir("\033[33m%d\033[0m  ", i+1);
 		}
-		else
+		de otro modo
 		{
-			printf("\033[33m0%d\033[0m  ", i+1);
+			imprimir("\033[33m0%d\033[0m  ", i+1);
 		}
-		for(j=0; j<strlen(todosLosNombres[i]); j++)
+		para(j=0; j<strlen(todosLosNombres[i]); j++)
 		{
-			printf("\033[33m%c\033[0m", todosLosNombres[i][j]);
+			imprimir("\033[33m%c\033[0m", todosLosNombres[i][j]);
 		}
-		for(k=0; k<11-strlen(todosLosNombres[i]); k++)
+		para(k=0; k<11-strlen(todosLosNombres[i]); k++)
 		{
-			printf(" ");
+			imprimir(" ");
 		}
-		for(j=0; j<strlen(todosLosApellidos[i]); j++)
+		para(j=0; j<strlen(todosLosApellidos[i]); j++)
 		{
-			printf("\033[33m%c\033[0m", todosLosApellidos[i][j]);
+			imprimir("\033[33m%c\033[0m", todosLosApellidos[i][j]);
 		}
-		for(k=0; k<11-strlen(todosLosApellidos[i]); k++)
+		para(k=0; k<11-strlen(todosLosApellidos[i]); k++)
 		{
-			printf(" ");
+			imprimir(" ");
 		}
-		for(j=0; j<strlen(todasLasCedulas[i]); j++)
+		para(j=0; j<strlen(todasLasCedulas[i]); j++)
 		{
-			printf("\033[33m%c\033[0m", todasLasCedulas[i][j]);
+			imprimir("\033[33m%c\033[0m", todasLasCedulas[i][j]);
 		}
-		for(k=0; k<12-strlen(todasLasCedulas[i]); k++)
+		para(k=0; k<12-strlen(todasLasCedulas[i]); k++)
 		{
-			printf(" ");
+			imprimir(" ");
 		}
-		printf(" ||\n");
+		imprimir(" ||\n");
 	}
-	printf(" ||________________________________________||\n");
-	printf(" |__________________________________________|\n\n");
-	printf("Presione cualquier tecla para regresar\n");
+	imprimir(" ||________________________________________||\n");
+	imprimir(" |__________________________________________|\n\n");
+	imprimir("Presione cualquier tecla para regresar\n");
 }
 
-int ImprimirFin()
+entero ImprimirFin()
 {
-	system("cls");
-		printf("\n");
-		printf("  \033[35m########### ########### #############    ############ ################\033[0m       \n");
-		printf("  \033[35m########### ########### #############    ############ ####################\033[0m    \n");
-		printf("  \033[35m########### ########### #############    ############ ######################\033[0m  \n");
-		printf("                \033[35m########                     ########                ##########\033[0m \n");
-		printf("                \033[35m########                 \033[32m #  \033[35m########                   ########\033[0m\n");
-		printf("  \033[32m######        \033[35m########              \033[32m ######\033[35m########\033[32m####                \033[35m#######\033[0m\n");
-		printf(" \033[32m########       \033[35m########         \033[32m ###   # ###\033[35m########\033[32m##########          \033[35m#######\033[0m\n");
-		printf("   \033[32m########    #\033[35m########   \033[32m ##############   \033[35m########\033[32m############       \033[35m########\033[0m\n");
-		printf("  \033[32m##############\033[35m########\033[32m#################    \033[35m########  \033[32m############    \033[35m#########\033[0m\n");
-		printf("   \033[32m#############\033[35m########\033[32m################     \033[35m######## #########################\033[0m \n");
-		printf(" \033[32m###############\033[35m########\033[32m############         \033[35m######## #######################\033[0m   \n");
-		printf(" \033[32m#            ##\033[35m\033[35m########\033[32m#######              \033[35m######## ####################\033[0m      \n");
-		printf("                \033[35m########\033[32m###########          \033[35m########    \033[32m#############\033[0m          \n");
-		printf("                \033[35m######## \033[32m###########         \033[35m########     \033[32m #########\033[0m            \n");
-		printf("                \033[35m########  \033[32m###########        \033[35m########        \033[32m#### \033[0m              \n");
-		printf("                 \033[35m########  \033[32m######           \033[35m#########                           \n");
-		printf("                 \033[35m##########               ##########\033[0m                            \n");
-		printf("                \033[35m#  ###############################  # \033[0m                          \n");
-		printf("                \033[35m###  ###########################  ###\033[0m                           \n");
-		printf("                \033[35m######  #####################  ###### \033[0m                          \n");
-		printf("                \033[35m########                     ########\033[0m                           \n");
-		printf("\n");
-		printf("\033[33m  #####  ######     #     #####  ###    #     #####     ######  ####### ######  \n");
-		 printf(" #     # #     #   # #   #     #  #    # #   #     #    #     # #     # #     # \n");
-		 printf(" #       #     #  #   #  #        #   #   #  #          #     # #     # #     # \n");
-		 printf(" #  #### ######  #     # #        #  #     #  #####     ######  #     # ######  \n");
-		 printf(" #     # #   #   ####### #        #  #######       #    #       #     # #   #   \n");
-		 printf(" #     # #    #  #     # #     #  #  #     # #     #    #       #     # #    #  \n");
-		 printf("  #####  #     # #     #  #####  ### #     #  #####     #       ####### #     # \n");
-		 printf("                                                                                \n");
-		 printf("          #     # ####### ### #       ### #######    #    ######                \n");
-		 printf("          #     #    #     #  #        #       #    # #   #     #               \n");
-		 printf("          #     #    #     #  #        #      #    #   #  #     #               \n");
-		 printf("          #     #    #     #  #        #     #    #     # ######                \n");
-		 printf("          #     #    #     #  #        #    #     ####### #   #                 \n");
-		 printf("          #     #    #     #  #        #   #      #     # #    #                \n");
-		 printf("           #####     #    ### ####### ### ####### #     # #     #               \033[0m\n");
+	sistema("limpiar");
+		imprimir("\n");
+		imprimir("  \033[35m########### ########### #############    ############ ################\033[0m       \n");
+		imprimir("  \033[35m########### ########### #############    ############ ####################\033[0m    \n");
+		imprimir("  \033[35m########### ########### #############    ############ ######################\033[0m  \n");
+		imprimir("                \033[35m########                     ########                ##########\033[0m \n");
+		imprimir("                \033[35m########                 \033[32m #  \033[35m########                   ########\033[0m\n");
+		imprimir("  \033[32m######        \033[35m########              \033[32m ######\033[35m########\033[32m####                \033[35m#######\033[0m\n");
+		imprimir(" \033[32m########       \033[35m########         \033[32m ###   # ###\033[35m########\033[32m##########          \033[35m#######\033[0m\n");
+		imprimir("   \033[32m########    #\033[35m########   \033[32m ##############   \033[35m########\033[32m############       \033[35m########\033[0m\n");
+		imprimir("  \033[32m##############\033[35m########\033[32m#################    \033[35m########  \033[32m############    \033[35m#########\033[0m\n");
+		imprimir("   \033[32m#############\033[35m########\033[32m################     \033[35m######## #########################\033[0m \n");
+		imprimir(" \033[32m###############\033[35m########\033[32m############         \033[35m######## #######################\033[0m   \n");
+		imprimir(" \033[32m#            ##\033[35m\033[35m########\033[32m#######              \033[35m######## ####################\033[0m      \n");
+		imprimir("                \033[35m########\033[32m###########          \033[35m########    \033[32m#############\033[0m          \n");
+		imprimir("                \033[35m######## \033[32m###########         \033[35m########     \033[32m #########\033[0m            \n");
+		imprimir("                \033[35m########  \033[32m###########        \033[35m########        \033[32m#### \033[0m              \n");
+		imprimir("                 \033[35m########  \033[32m######           \033[35m#########                           \n");
+		imprimir("                 \033[35m##########               ##########\033[0m                            \n");
+		imprimir("                \033[35m#  ###############################  # \033[0m                          \n");
+		imprimir("                \033[35m###  ###########################  ###\033[0m                           \n");
+		imprimir("                \033[35m######  #####################  ###### \033[0m                          \n");
+		imprimir("                \033[35m########                     ########\033[0m                           \n");
+		imprimir("\n");
+		imprimir("\033[33m  #####  ######     #     #####  ###    #     #####     ######  ####### ######  \n");
+		 imprimir(" #     # #     #   # #   #     #  #    # #   #     #    #     # #     # #     # \n");
+		 imprimir(" #       #     #  #   #  #        #   #   #  #          #     # #     # #     # \n");
+		 imprimir(" #  #### ######  #     # #        #  #     #  #####     ######  #     # ######  \n");
+		 imprimir(" #     # #   #   ####### #        #  #######       #    #       #     # #   #   \n");
+		 imprimir(" #     # #    #  #     # #     #  #  #     # #     #    #       #     # #    #  \n");
+		 imprimir("  #####  #     # #     #  #####  ### #     #  #####     #       ####### #     # \n");
+		 imprimir("                                                                                \n");
+		 imprimir("          #     # ####### ### #       ### #######    #    ######                \n");
+		 imprimir("          #     #    #     #  #        #       #    # #   #     #               \n");
+		 imprimir("          #     #    #     #  #        #      #    #   #  #     #               \n");
+		 imprimir("          #     #    #     #  #        #     #    #     # ######                \n");
+		 imprimir("          #     #    #     #  #        #    #     ####### #   #                 \n");
+		 imprimir("          #     #    #     #  #        #   #      #     # #    #                \n");
+		 imprimir("           #####     #    ### ####### ### ####### #     # #     #               \033[0m\n");
 }
 
